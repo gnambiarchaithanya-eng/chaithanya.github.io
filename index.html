@@ -14,6 +14,7 @@
             color: #f5f5f5;
             font-family: 'Segoe UI', sans-serif;
             text-align: center;
+            overflow-x: hidden;
         }
 
         h1 {
@@ -55,6 +56,42 @@
             100% { opacity: 0; transform: scale(2); }
         }
 
+        /* ⭐ STARS */
+        .stars span {
+            position: fixed;
+            color: #c8a165;
+            font-size: 20px;
+            animation: float 10s linear infinite;
+        }
+
+        .stars span:nth-child(1){ left:10%; }
+        .stars span:nth-child(2){ left:40%; }
+        .stars span:nth-child(3){ left:70%; }
+        .stars span:nth-child(4){ left:85%; }
+
+        @keyframes float {
+            0% { transform: translateY(100vh); opacity:0; }
+            50% { opacity:1; }
+            100% { transform: translateY(-10vh); opacity:0; }
+        }
+
+        /* 🍵 TEAPOTS */
+        .teapot {
+            position: fixed;
+            font-size: 28px;
+            animation: floatTea 15s linear infinite;
+            opacity: 0.7;
+        }
+
+        .teapot:nth-child(1){ left:15%; animation-delay:0s; }
+        .teapot:nth-child(2){ left:55%; animation-delay:5s; }
+        .teapot:nth-child(3){ left:85%; animation-delay:10s; }
+
+        @keyframes floatTea {
+            0% { transform: translateY(100vh) rotate(0deg); }
+            100% { transform: translateY(-10vh) rotate(360deg); }
+        }
+
         /* 🎴 CARD */
         .card {
             background: #1a1a1a;
@@ -70,6 +107,19 @@
 </head>
 
 <body>
+
+    <!-- ⭐ STARS -->
+    <div class="stars">
+        <span>✦</span>
+        <span>★</span>
+        <span>✧</span>
+        <span>✦</span>
+    </div>
+
+    <!-- 🍵 TEAPOTS -->
+    <div class="teapot">🫖</div>
+    <div class="teapot">🫖</div>
+    <div class="teapot">🫖</div>
 
     <div class="hero">
         <h1>ICONIC BROWN</h1>
@@ -124,13 +174,11 @@
 
             document.getElementById("cards").appendChild(card);
 
-            // save
             let data=JSON.parse(localStorage.getItem("ocs")||"[]");
             data.push({name,habit,color});
             localStorage.setItem("ocs",JSON.stringify(data));
         }
 
-        // load saved OCs
         window.onload=function(){
             let data=JSON.parse(localStorage.getItem("ocs")||"[]");
 
