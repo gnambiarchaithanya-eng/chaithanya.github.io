@@ -1,29 +1,89 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Mooni's World</title>
+    <title>ICONIC BROWN</title>
+
     <style>
         body {
-            background-color: black;
-            color: white;
+            margin: 0;
+            background: linear-gradient(to bottom, #0d0d0d, #1a1a1a);
+            color: #f5f5f5;
+            font-family: 'Segoe UI', sans-serif;
             text-align: center;
-            font-family: Arial;
         }
+
+        .hero {
+            padding: 100px 20px;
+        }
+
         h1 {
-            margin-top: 100px;
-            font-size: 50px;
+            font-size: 60px;
+            letter-spacing: 3px;
+            color: #c8a165;
         }
+
         p {
-            font-size: 20px;
+            font-size: 18px;
+            opacity: 0.8;
+        }
+
+        .btn {
+            margin-top: 20px;
+            padding: 12px 25px;
+            border: none;
+            background-color: #c8a165;
+            color: black;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 25px;
+        }
+
+        .section {
+            padding: 60px 20px;
+        }
+
+        .gallery img {
+            width: 200px;
+            margin: 10px;
+            border-radius: 15px;
+            transition: 0.3s;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.1);
+        }
+
+        footer {
+            padding: 20px;
+            font-size: 14px;
+            opacity: 0.6;
         }
     </style>
 </head>
 
 <body>
 
-    <h1>ICONIC BROWN</h1>
-    <p>Welcome to my world ✨</p>
-    <p>Art | Aesthetic | Dreams</p>
+    <div class="hero">
+        <h1>ICONIC BROWN</h1>
+        <p>Art • Aesthetic • Dreams</p>
+        <button class="btn">Explore</button>
+    </div>
+
+    <div class="section">
+        <h2>About Me</h2>
+        <p>Hi, I’m Mooni. I create aesthetic art, fashion sketches, and dreamy visuals.</p>
+    </div>
+
+    <div class="section gallery">
+        <h2>My Art</h2>
+        <img src="https://via.placeholder.com/200">
+        <img src="https://via.placeholder.com/200">
+        <img src="https://via.placeholder.com/200">
+    </div>
+
+    <footer>
+        © 2026 ICONIC BROWN | Made by Mooni ✨
+    </footer>
 
 </body>
 </html>
