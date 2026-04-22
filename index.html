@@ -3,13 +3,10 @@
 <head>
     <title>ICONIC BROWN</title>
 
-    <!-- ✨ FUN FONT -->
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 
     <style>
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
         body {
             margin: 0;
@@ -22,132 +19,109 @@
 
         h1 {
             font-size: 65px;
-            letter-spacing: 3px;
             color: #c8a165;
             font-family: 'Pacifico', cursive;
         }
 
-        p {
-            font-size: 18px;
-            opacity: 0.8;
-        }
-
-        .hero {
-            padding: 100px 20px;
-        }
+        .hero { padding: 100px 20px; }
 
         .btn {
             margin-top: 20px;
             padding: 12px 25px;
-            border: none;
             background-color: #c8a165;
-            color: black;
-            font-size: 16px;
-            cursor: pointer;
+            border: none;
             border-radius: 25px;
+            cursor: pointer;
         }
 
-        .section {
-            padding: 60px 20px;
-        }
+        .section { padding: 80px 20px; }
 
-        .gallery img {
-            width: 200px;
+        input {
+            padding: 10px;
             margin: 10px;
-            border-radius: 15px;
-            transition: 0.3s;
+            border-radius: 10px;
+            border: none;
+            width: 200px;
         }
 
-        .gallery img:hover {
-            transform: scale(1.1);
+        /* ⭐ SPARKLE */
+        .sparkle {
+            position: fixed;
+            pointer-events: none;
+            color: #c8a165;
+            animation: sparkle 1s linear forwards;
         }
 
-        footer {
-            padding: 20px;
-            font-size: 14px;
-            opacity: 0.6;
+        @keyframes sparkle {
+            0% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(2); }
         }
 
         /* ⭐ STARS */
-        .stars {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: -1;
-        }
-
         .stars span {
-            position: absolute;
+            position: fixed;
             color: #c8a165;
-            font-size: 20px;
             animation: float 10s linear infinite;
         }
 
-        .stars span:nth-child(1) { left: 10%; animation-delay: 0s; }
-        .stars span:nth-child(2) { left: 30%; animation-delay: 2s; }
-        .stars span:nth-child(3) { left: 50%; animation-delay: 4s; }
-        .stars span:nth-child(4) { left: 70%; animation-delay: 6s; }
-        .stars span:nth-child(5) { left: 90%; animation-delay: 8s; }
+        .stars span:nth-child(1){ left:10%; }
+        .stars span:nth-child(2){ left:40%; }
+        .stars span:nth-child(3){ left:70%; }
 
         @keyframes float {
-            0% { transform: translateY(100vh); opacity: 0; }
-            50% { opacity: 1; }
-            100% { transform: translateY(-10vh); opacity: 0; }
+            0% { transform: translateY(100vh); }
+            100% { transform: translateY(-10vh); }
         }
 
-        /* 🍵 TEAPOTS */
-        .teapot {
-            position: fixed;
-            font-size: 30px;
-            animation: floatTea 15s linear infinite;
-            opacity: 0.7;
-        }
-
-        .teapot:nth-child(1) { left: 15%; animation-delay: 0s; }
-        .teapot:nth-child(2) { left: 55%; animation-delay: 5s; }
-        .teapot:nth-child(3) { left: 85%; animation-delay: 10s; }
-
-        @keyframes floatTea {
-            0% { transform: translateY(100vh) rotate(0deg); }
-            100% { transform: translateY(-10vh) rotate(360deg); }
-        }
     </style>
 </head>
 
 <body>
 
-    <!-- ⭐ STARS -->
+    <!-- ⭐ stars -->
     <div class="stars">
         <span>✦</span>
         <span>★</span>
         <span>✧</span>
-        <span>✦</span>
-        <span>★</span>
     </div>
-
-    <!-- 🍵 TEAPOTS -->
-    <div class="teapot">🫖</div>
-    <div class="teapot">🫖</div>
-    <div class="teapot">🫖</div>
 
     <div class="hero">
         <h1>ICONIC BROWN</h1>
         <p>Hello there ✨</p>
-        <a href="#art"><button class="btn">Explore</button></a>
+        <button class="btn" onclick="goExplore(event)">Explore</button>
     </div>
 
-    <div class="section gallery" id="art">
+    <!-- ✨ EXPLORE SECTION -->
+    <div class="section" id="explore">
         <h2>Hi, want to create your own OC? then you’re at the right place &lt;3</h2>
-        <img src="https://via.placeholder.com/200">
-        <img src="https://via.placeholder.com/200">
-        <img src="https://via.placeholder.com/200">
+
+        <p>Enter your OC details 👇</p>
+
+        <input type="text" placeholder="Name"><br>
+        <input type="text" placeholder="Habit"><br>
+        <input type="text" placeholder="Favorite Color"><br>
     </div>
 
-    <footer>
-        © 2026 ICONIC BROWN | Made by CHAITHANYA ✨
-    </footer>
+    <script>
+        function goExplore(e) {
+            // scroll
+            document.getElementById("explore").scrollIntoView();
+
+            // sparkle effect
+            for(let i=0;i<15;i++){
+                let star = document.createElement("div");
+                star.innerHTML = "✦";
+                star.className = "sparkle";
+
+                star.style.left = (e.clientX + Math.random()*50 - 25) + "px";
+                star.style.top = (e.clientY + Math.random()*50 - 25) + "px";
+
+                document.body.appendChild(star);
+
+                setTimeout(()=>{ star.remove(); },1000);
+            }
+        }
+    </script>
 
 </body>
 </html>
