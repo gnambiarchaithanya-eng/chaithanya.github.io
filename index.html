@@ -14,7 +14,6 @@
             color: #f5f5f5;
             font-family: 'Segoe UI', sans-serif;
             text-align: center;
-            overflow-x: hidden;
         }
 
         h1 {
@@ -26,7 +25,7 @@
         .hero { padding: 100px 20px; }
 
         .btn {
-            margin-top: 20px;
+            margin: 20px;
             padding: 12px 25px;
             background-color: #c8a165;
             border: none;
@@ -34,43 +33,37 @@
             cursor: pointer;
         }
 
-        .section { padding: 80px 20px; }
-
         input {
             padding: 10px;
             margin: 10px;
             border-radius: 10px;
             border: none;
-            width: 200px;
         }
 
-        /* ⭐ SPARKLE */
+        .section { padding: 80px 20px; }
+
+        /* ✨ SPARKLE */
         .sparkle {
             position: fixed;
-            pointer-events: none;
             color: #c8a165;
             animation: sparkle 1s linear forwards;
+            pointer-events: none;
         }
 
         @keyframes sparkle {
-            0% { opacity: 1; transform: scale(1); }
+            0% { opacity: 1; }
             100% { opacity: 0; transform: scale(2); }
         }
 
-        /* ⭐ STARS */
-        .stars span {
-            position: fixed;
-            color: #c8a165;
-            animation: float 10s linear infinite;
-        }
-
-        .stars span:nth-child(1){ left:10%; }
-        .stars span:nth-child(2){ left:40%; }
-        .stars span:nth-child(3){ left:70%; }
-
-        @keyframes float {
-            0% { transform: translateY(100vh); }
-            100% { transform: translateY(-10vh); }
+        /* 🎴 CARD */
+        .card {
+            background: #1a1a1a;
+            border-radius: 20px;
+            padding: 20px;
+            margin: 15px;
+            display: inline-block;
+            width: 200px;
+            border: 1px solid #c8a165;
         }
 
     </style>
@@ -78,48 +71,79 @@
 
 <body>
 
-    <!-- ⭐ stars -->
-    <div class="stars">
-        <span>✦</span>
-        <span>★</span>
-        <span>✧</span>
-    </div>
-
     <div class="hero">
         <h1>ICONIC BROWN</h1>
         <p>Hello there ✨</p>
         <button class="btn" onclick="goExplore(event)">Explore</button>
     </div>
 
-    <!-- ✨ EXPLORE SECTION -->
     <div class="section" id="explore">
-        <h2>Hi, want to create your own OC? then you’re at the right place &lt;3</h2>
+        <h2>Create Your OC 💫</h2>
 
-        <p>Enter your OC details 👇</p>
+        <input id="name" placeholder="Name"><br>
+        <input id="habit" placeholder="Habit"><br>
+        <input id="color" placeholder="Favorite Color"><br>
 
-        <input type="text" placeholder="Name"><br>
-        <input type="text" placeholder="Habit"><br>
-        <input type="text" placeholder="Favorite Color"><br>
+        <button class="btn" onclick="createOC()">Create OC</button>
+
+        <div id="cards"></div>
     </div>
 
     <script>
-        function goExplore(e) {
-            // scroll
+        function goExplore(e){
             document.getElementById("explore").scrollIntoView();
 
-            // sparkle effect
-            for(let i=0;i<15;i++){
-                let star = document.createElement("div");
-                star.innerHTML = "✦";
-                star.className = "sparkle";
+            for(let i=0;i<20;i++){
+                let s=document.createElement("div");
+                s.innerHTML="✦";
+                s.className="sparkle";
 
-                star.style.left = (e.clientX + Math.random()*50 - 25) + "px";
-                star.style.top = (e.clientY + Math.random()*50 - 25) + "px";
+                s.style.left=(e.clientX + Math.random()*50 - 25)+"px";
+                s.style.top=(e.clientY + Math.random()*50 - 25)+"px";
 
-                document.body.appendChild(star);
-
-                setTimeout(()=>{ star.remove(); },1000);
+                document.body.appendChild(s);
+                setTimeout(()=>s.remove(),1000);
             }
+        }
+
+        function createOC(){
+            let name=document.getElementById("name").value;
+            let habit=document.getElementById("habit").value;
+            let color=document.getElementById("color").value;
+
+            if(name==="") return;
+
+            let card=document.createElement("div");
+            card.className="card";
+
+            card.innerHTML=`
+                <h3>${name}</h3>
+                <p>Habit: ${habit}</p>
+                <p>Fav Color: ${color}</p>
+            `;
+
+            document.getElementById("cards").appendChild(card);
+
+            // save
+            let data=JSON.parse(localStorage.getItem("ocs")||"[]");
+            data.push({name,habit,color});
+            localStorage.setItem("ocs",JSON.stringify(data));
+        }
+
+        // load saved OCs
+        window.onload=function(){
+            let data=JSON.parse(localStorage.getItem("ocs")||"[]");
+
+            data.forEach(d=>{
+                let card=document.createElement("div");
+                card.className="card";
+                card.innerHTML=`
+                    <h3>${d.name}</h3>
+                    <p>Habit: ${d.habit}</p>
+                    <p>Fav Color: ${d.color}</p>
+                `;
+                document.getElementById("cards").appendChild(card);
+            });
         }
     </script>
 
